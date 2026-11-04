@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mohit Test Point — Free Online Tests</title>
+<style>
+:root{--navy:#142b50;--blue:#2457a6;--light:#f3f6fb;--ink:#182235;--muted:#65738a;--line:#dce4ef;--green:#16834a;--red:#c43b42}
+*{box-sizing:border-box}body{margin:0;background:var(--light);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(120deg,#142b50,#2457a6);color:#fff;padding:20px max(18px,calc((100% - 1120px)/2));}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:23px;font-weight:850;letter-spacing:.3px}.tag{color:#d8e6ff;font-size:13px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}button,.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--blue);color:#fff}button:hover,.btn:hover{filter:brightness(1.06)}button.secondary{background:#e8eef8;color:#17345f}button.ghost{background:transparent;border:1px solid #ffffff70;color:white}button.danger{background:#b8323a}button.success{background:var(--green)}
+main{max-width:1120px;margin:24px auto;padding:0 16px 50px}.hero{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 6px 24px #18345b0b}.hero h1{margin:0 0 6px;font-size:28px}.muted{color:var(--muted)}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:#edf3fc;padding:12px 16px;border-radius:12px;min-width:110px}.stat b{display:block;font-size:22px;color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:20px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 4px 18px #18345b08}.card h3{margin:0 0 5px}.pill{display:inline-block;background:#eaf1fc;color:#234b85;padding:4px 9px;border-radius:30px;font-size:12px;font-weight:700}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.hidden{display:none!important}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd6e5;border-radius:9px;font:inherit;background:white;color:var(--ink)}textarea{min-height:86px;resize:vertical}label{display:block;font-weight:700;margin:12px 0 5px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.formgrid .full{grid-column:1/-1}.section-title{margin:26px 0 10px}.question{font-size:18px;font-weight:750;margin:15px 0}.option{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:10px;margin:8px 0;background:white;cursor:pointer}.option:has(input:checked){border-color:var(--blue);background:#eef4ff}.option input{width:auto;margin-top:4px}.palette{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:12px}.palette button{padding:8px 0;background:#e8edf5;color:#24354e}.palette button.current{background:var(--blue);color:white}.palette button.answered{background:#d9f1e3;color:#145b35}.timer{font-weight:850;color:#a12d36;background:#fff0f0;padding:8px 12px;border-radius:9px}.notice{padding:12px 14px;background:#fff8df;border:1px solid #f0df9b;border-radius:10px;color:#684f12;margin:12px 0}.successbox{background:#e8f7ee;border:1px solid #b9e4c8;padding:18px;border-radius:14px}.resultbig{font-size:36px;font-weight:900;color:var(--navy)}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f5f7fb}.small{font-size:13px}.adminbar{background:#f0f4fb;border:1px solid var(--line);padding:12px;border-radius:12px;margin-bottom:14px}
+footer{text-align:center;color:var(--muted);padding:24px;font-size:13px}
+@media(max-width:600px){.formgrid{grid-template-columns:1fr}.formgrid .full{grid-column:auto}.hero h1{font-size:23px}.palette{grid-template-columns:repeat(6,1fr)}}
+</style></head>
+<body>
+<header><div class="top"><div><div class="brand">MOHIT TEST POINT</div><div class="tag">Your Exam Preparation Partner · Free for Everyone</div></div><div class="row"><button class="ghost" onclick="showHome()">Home</button><button class="ghost" onclick="openAdmin()">Admin Panel</button></div></div></header>
+<main>
+<section id="home">
+ <div class="hero"><div><span class="pill">FREE ONLINE TESTS</span><h1>अपनी तैयारी को परखिए</h1><div class="muted">SSC · Railway · Banking · Nursing · General Studies</div></div><div class="stats"><div class="stat"><b id="totalQ">0</b><span class="small muted">Questions</span></div><div class="stat"><b id="totalTests">0</b><span class="small muted">Subjects</span></div><div class="stat"><b>Free</b><span class="small muted">Student Access</span></div></div></div>
+ <h2 class="section-title">Available Tests</h2><div id="testCards" class="grid"></div>
+ <div class="notice small">Demo build: इस संस्करण में टेस्ट और Admin data इसी browser में सुरक्षित रहता है। इसे सभी छात्रों के लिए online प्रकाशित करने के लिए आगे server/database और सुरक्षित Admin login जोड़ना होगा।</div>
+</section>
+
+<section id="admin" class="hidden">
+ <div class="row between"><div><h2>Admin Panel</h2><div class="muted">प्रश्न जोड़ें, बदलें, हटाएँ और प्रश्न बैंक का बैकअप रखें।</div></div><button class="secondary" onclick="showHome()">Student View</button></div>
+ <div id="adminLogin" class="card" style="max-width:460px;margin-top:16px"><h3>Admin Login</h3><p class="muted small">पहली बार का demo PIN: 2468 — लॉगिन के बाद इसे बदलें।</p><label>Admin PIN</label><input id="pinInput" type="password" inputmode="numeric" placeholder="PIN दर्ज करें"><div class="row" style="margin-top:12px"><button onclick="loginAdmin()">Login</button></div><div id="loginMsg" class="small" style="color:var(--red);margin-top:8px"></div></div>
+ <div id="adminTools" class="hidden">
+  <div class="adminbar row between"><b>Admin mode active</b><button class="secondary" onclick="logoutAdmin()">Logout</button></div>
+  <div class="grid">
+   <div class="card"><h3>Question Editor</h3><div class="muted small">एक प्रश्न और चार विकल्प जोड़ें। सही विकल्प चुनें।</div>
+    <form id="qForm" onsubmit="saveQuestion(event)">
+     <input type="hidden" id="editId">
+     <label>Subject / Category</label><select id="qSubject"><option>Mathematics</option><option>Reasoning</option><option>General Knowledge</option><option>English</option><option>Science</option><option>Nursing</option><option>Other</option></select>
+     <label>Question</label><textarea id="qText" required placeholder="प्रश्न लिखें"></textarea>
+     <div class="formgrid">
+      <div><label>Option A</label><input id="optA" required></div><div><label>Option B</label><input id="optB" required></div>
+      <div><label>Option C</label><input id="optC" required></div><div><label>Option D</label><input id="optD" required></div>
+      <div class="full"><label>Correct Answer</label><select id="correct"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+      <div class="full"><label>Explanation (optional)</label><textarea id="explanation" placeholder="उत्तर का संक्षिप्त समाधान"></textarea></div>
+     </div><div class="row" style="margin-top:14px"><button type="submit" id="saveBtn">Add Question</button><button type="button" class="secondary" onclick="resetForm()">Clear</button></div>
+    </form>
+   </div>
+   <div class="card"><h3>Question Bank Tools</h3><p class="muted small">JSON backup से प्रश्नों को दूसरे browser या deployment में ले जा सकते हैं।</p>
+    <label>Import Questions (JSON)</label><input type="file" id="importFile" accept=".json,application/json">
+    <div class="row" style="margin-top:12px"><button onclick="importQuestions()">Import JSON</button><button class="secondary" onclick="exportQuestions()">Export Backup</button></div>
+    <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+    <label>Change Admin PIN</label><input id="newPin" type="password" inputmode="numeric" placeholder="नया PIN (कम से कम 4 अंक)">
+    <button class="secondary" style="margin-top:10px" onclick="changePin()">Update PIN</button>
+    <p class="notice small">सुरक्षा सूचना: यह local demo PIN है, production-grade authentication नहीं। सार्वजनिक website पर सुरक्षित server-side login आवश्यक है।</p>
+   </div>
+  </div>
+  <h3 class="section-title">Manage Questions <span class="pill" id="adminCount">0</span></h3>
+  <div class="card" style="overflow:auto"><table><thead><tr><th>Subject</th><th>Question</th><th>Correct</th><th>Actions</th></tr></thead><tbody id="questionRows"></tbody></table></div>
+ </div>
+</section>
+
+<section id="test" class="hidden">
+ <div class="row between"><div><h2 id="testTitle">Online Test</h2><div class="muted small" id="testSub"></div></div><div class="timer" id="timer">10:00</div></div>
+ <div class="grid" style="grid-template-columns:minmax(0,2fr) minmax(220px,1fr)">
+  <div class="card"><div class="row between"><span class="pill" id="qCount">Question 1</span><span class="small muted" id="subjectLabel"></span></div><div id="questionText" class="question"></div><div id="options"></div><div class="row between" style="margin-top:18px"><button class="secondary" onclick="prevQ()">Previous</button><div class="row"><button class="secondary" onclick="markReview()">Mark Review</button><button onclick="nextQ()">Next</button></div></div></div>
+  <div class="card"><b>Question Palette</b><div class="small muted">Green = Answered · Blue = Current</div><div id="palette" class="palette"></div><div class="row" style="margin-top:16px"><button class="success" style="width:100%" onclick="submitTest()">Submit Test</button></div></div>
+ </div>
+</section>
+<section id="result" class="hidden"><div class="row between"><h2>Test Result</h2><button class="secondary" onclick="showHome()">Back to Home</button></div><div id="resultContent"></div></section>
+</main><footer>© <span id="year"></span> Mohit Test Point · Free learning for everyone</footer>
+<script>
+const KEY='mtp_questions_v2', PINKEY='mtp_admin_pin_v2';
+const starter=[
+{ id:'s1',subject:'Mathematics',q:'यदि 25 का 20% कितना होगा?',opts:['2','5','10','15'],a:1,ex:'25 × 20/100 = 5'},
+{ id:'s2',subject:'Mathematics',q:'12 और 18 का LCM क्या है?',opts:['24','30','36','48'],a:2,ex:'12 और 18 का लघुत्तम समापवर्त्य 36 है।'},
+{ id:'s3',subject:'Reasoning',q:'श्रृंखला पूरी करें: 2, 4, 8, 16, __',opts:['18','24','30','32'],a:3,ex:'हर पद को 2 से गुणा किया गया है।'},
+{ id:'s4',subject:'General Knowledge',q:'भारत का संविधान कब लागू हुआ?',opts:['15 अगस्त 1947','26 जनवरी 1950','26 नवंबर 1949','2 अक्टूबर 1950'],a:1,ex:'भारतीय संविधान 26 जनवरी 1950 को लागू हुआ।'},
+{ id:'s5',subject:'Science',q:'मानव शरीर में रक्त को पंप करने वाला अंग कौन-सा है?',opts:['फेफड़ा','यकृत','हृदय','गुर्दा'],a:2,ex:'हृदय रक्त को पूरे शरीर में पंप करता है।'},
+{ id:'s6',subject:'English',q:'Choose the synonym of “Rapid”.',opts:['Slow','Fast','Weak','Late'],a:1,ex:'Rapid means fast or quick.'},
+{ id:'s7',subject:'Nursing',q:'सामान्य वयस्क की औसत resting pulse rate कितनी होती है?',opts:['20–40/min','60–100/min','110–140/min','150–180/min'],a:1,ex:'सामान्य वयस्क resting pulse rate लगभग 60–100 प्रति मिनट होती है।'}
+];
+let questions=loadQuestions(),admin=false,testItems=[],answers={},review=new Set(),current=0,timeLeft=600,tick=null,activeSubject='';
+function loadQuestions(){try{const x=JSON.parse(localStorage.getItem(KEY));return Array.isArray(x)&&x.length?x:starter.slice()}catch(e){return starter.slice()}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(questions));updateHome()}
+function updateHome(){document.getElementById('totalQ').textContent=questions.length;document.getElementById('totalTests').textContent=new Set(questions.map(q=>q.subject)).size;let groups={};questions.forEach(q=>groups[q.subject]=(groups[q.subject]||0)+1);document.getElementById('testCards').innerHTML=Object.entries(groups).map(([s,n])=>`<div class="card"><span class="pill">FREE TEST</span><h3 style="margin-top:12px">${esc(s)}</h3><p class="muted small">${n} questions available · 10 minute test</p><button onclick="startTest('${encodeURIComponent(s)}')">Start Test</button></div>`).join('')||'<div class="card">अभी कोई प्रश्न उपलब्ध नहीं है।</div>'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function show(id){['home','admin','test','result'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id))}
+function showHome(){if(tick){clearInterval(tick);tick=null}show('home');updateHome()}
+function openAdmin(){show('admin');document.getElementById('adminLogin').classList.toggle('hidden',admin);document.getElementById('adminTools').classList.toggle('hidden',!admin);if(admin)renderAdmin()}
+function loginAdmin(){let p=document.getElementById('pinInput').value;let saved=localStorage.getItem(PINKEY)||'2468';if(p===saved){admin=true;document.getElementById('adminLogin').classList.add('hidden');document.getElementById('adminTools').classList.remove('hidden');renderAdmin()}else document.getElementById('loginMsg').textContent='गलत PIN। फिर से कोशिश करें।'}
+function logoutAdmin(){admin=false;document.getElementById('pinInput').value='';openAdmin()}
+function changePin(){let p=document.getElementById('newPin').value;if(!/^\d{4,}$/.test(p)){alert('कम से कम 4 अंकों का PIN दर्ज करें।');return}localStorage.setItem(PINKEY,p);document.getElementById('newPin').value='';alert('इस browser में PIN update हो गया।')}
+function renderAdmin(){document.getElementById('adminCount').textContent=questions.length;document.getElementById('questionRows').innerHTML=questions.map(q=>`<tr><td>${esc(q.subject)}</td><td>${esc(q.q)}</td><td>${'ABCD'[q.a]}</td><td><div class="row"><button class="secondary" onclick="editQuestion('${q.id}')">Edit</button><button class="danger" onclick="deleteQuestion('${q.id}')">Delete</button></div></td></tr>`).join('')}
+function resetForm(){document.getElementById('qForm').reset();document.getElementById('editId').value='';document.getElementById('saveBtn').textContent='Add Question'}
+function saveQuestion(e){e.preventDefault();if(!admin)return;let id=document.getElementById('editId').value;let obj={id:id||('q'+Date.now()),subject:document.getElementById('qSubject').value,q:document.getElementById('qText').value.trim(),opts:['optA','optB','optC','optD'].map(x=>document.getElementById(x).value.trim()),a:Number(document.getElementById('correct').value),ex:document.getElementById('explanation').value.trim()};if(id){questions=questions.map(q=>q.id===id?obj:q)}else questions.push(obj);persist();renderAdmin();resetForm();alert(id?'Question updated':'Question added')}
+function editQuestion(id){let q=questions.find(x=>x.id===id);if(!q)return;document.getElementById('editId').value=q.id;document.getElementById('qSubject').value=q.subject;document.getElementById('qText').value=q.q;q.opts.forEach((v,i)=>document.getElementById('opt'+ 'ABCD'[i]).value=v);document.getElementById('correct').value=q.a;document.getElementById('explanation').value=q.ex||'';document.getElementById('saveBtn').textContent='Update Question';window.scrollTo({top:0,behavior:'smooth'})}
+function deleteQuestion(id){if(!confirm('क्या यह प्रश्न हटाना चाहते हैं?'))return;questions=questions.filter(q=>q.id!==id);persist();renderAdmin()}
+function exportQuestions(){let blob=new Blob([JSON.stringify(questions,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mohit-test-point-questions.json';a.click();URL.revokeObjectURL(a.href)}
+function importQuestions(){let f=document.getElementById('importFile').files[0];if(!f){alert('पहले JSON file चुनें');return}let r=new FileReader();r.onload=()=>{try{let data=JSON.parse(r.result);if(!Array.isArray(data)||!data.every(q=>q.subject&&q.q&&Array.isArray(q.opts)&&q.opts.length===4&&Number.isInteger(q.a)&&q.a>=0&&q.a<=3))throw Error();if(!confirm('Import करने पर मौजूदा प्रश्न बैंक replace होगा। जारी रखें?'))return;questions=data.map((q,i)=>({...q,id:q.id||'imp'+Date.now()+i}));persist();renderAdmin();alert('Questions imported')}catch(e){alert('JSON format सही नहीं है। Export की गई template file इस्तेमाल करें।')}};r.readAsText(f)}
+function startTest(encoded){activeSubject=decodeURIComponent(encoded);testItems=questions.filter(q=>q.subject===activeSubject);if(!testItems.length)return;answers={};review=new Set();current=0;timeLeft=600;show('test');document.getElementById('testTitle').textContent=activeSubject+' Test';document.getElementById('testSub').textContent=testItems.length+' Questions · 10 Minutes';renderQuestion();if(tick)clearInterval(tick);tick=setInterval(()=>{timeLeft--;document.getElementById('timer').textContent=Math.floor(timeLeft/60)+':'+String(timeLeft%60).padStart(2,'0');if(timeLeft<=0)submitTest(true)},1000)}
+function renderQuestion(){let q=testItems[current];document.getElementById('qCount').textContent=`Question ${current+1} of ${testItems.length}`;document.getElementById('subjectLabel').textContent=q.subject;document.getElementById('questionText').textContent=q.q;document.getElementById('options').innerHTML=q.opts.map((o,i)=>`<label class="option"><input type="radio" name="answer" value="${i}" ${answers[current]===i?'checked':''} onchange="answers[${current}]=${i};renderPalette()"><span><b>${'ABCD'[i]}.</b> ${esc(o)}</span></label>`).join('');renderPalette()}
+function renderPalette(){document.getElementById('palette').innerHTML=testItems.map((q,i)=>`<button class="${i===current?'current ':''}${answers[i]!==undefined?'answered':''}" onclick="current=${i};renderQuestion()">${i+1}${review.has(i)?'★':''}</button>`).join('')}
+function prevQ(){if(current>0){current--;renderQuestion()}}function nextQ(){if(current<testItems.length-1){current++;renderQuestion()}}function markReview(){review.add(current);nextQ();renderPalette()}
+function submitTest(auto=false){if(tick){clearInterval(tick);tick=null}if(!auto&&!confirm('क्या आप टेस्ट submit करना चाहते हैं?'))return;let correct=0;testItems.forEach((q,i)=>{if(answers[i]===q.a)correct++});let attempted=Object.keys(answers).length,wrong=attempted-correct,unattempted=testItems.length-attempted,percent=Math.round(correct/testItems.length*100);show('result');document.getElementById('resultContent').innerHTML=`<div class="successbox"><div class="muted">Your Score</div><div class="resultbig">${correct} / ${testItems.length}</div><b>${percent}%</b> accuracy · ${auto?'समय समाप्त होने पर स्वतः submit हुआ':'Test submitted successfully'}</div><div class="grid"><div class="card"><b>${attempted}</b><div class="muted small">Attempted</div></div><div class="card"><b style="color:var(--green)">${correct}</b><div class="muted small">Correct</div></div><div class="card"><b style="color:var(--red)">${wrong}</b><div class="muted small">Wrong</div></div><div class="card"><b>${unattempted}</b><div class="muted small">Unattempted</div></div></div><h3>Answer Review</h3><div class="card" style="overflow:auto"><table><thead><tr><th>Q.</th><th>Question & Answer</th><th>Your Answer</th><th>Status</th></tr></thead><tbody>${testItems.map((q,i)=>`<tr><td>${i+1}</td><td>${esc(q.q)}<br><span class="small" style="color:var(--green)">Correct: ${'ABCD'[q.a]}. ${esc(q.opts[q.a])}</span>${q.ex?'<br><span class="small muted">'+esc(q.ex)+'</span>':''}</td><td>${answers[i]===undefined?'Not attempted': 'ABCD'[answers[i]]+'. '+esc(q.opts[answers[i]])}</td><td>${answers[i]===q.a?'<span style="color:var(--green)">Correct</span>':answers[i]===undefined?'<span class="muted">Skipped</span>':'<span style="color:var(--red)">Wrong</span>'}</td></tr>`).join('')}</tbody></table></div><button style="margin-top:16px" onclick="showHome()">Take Another Test</button>`}
+document.getElementById('year').textContent=new Date().getFullYear();updateHome();
+</script></body></html>
